@@ -5,10 +5,18 @@ export function setEntries(state, entries){
 }
 
 export function next(state){
-  let entries = state.get('entries')
+  let vote = state.get('vote');
+  if (!vote) {return;}
+  let [a, b] = vote.get('pair');
+  let score1 = vote.getIn(['tally', a]);
+  let score2 = vote.getIn(['tally', b]);
+  let entries = state.get('entries');
+  let winner = (score1 == score2)? [a, b] : (score1 > score2)? a:b
   return state.merge({
-    'vote': Map({pair: entries.take(2)}),
-    'entries': entries.skip(2),
+    vote : Map({
+      pair : entries.take(2)
+    }),
+      entries : entries.concat(winner).skip(2)
   })
 }
 
