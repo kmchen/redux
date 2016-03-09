@@ -22,12 +22,12 @@ describe('reducer', () => {
         })
     let action = {type: 'TALLY', tally : 'movie one'}
     let nextState = reducer(state, action)
-    expect(nextState).to.equal(Map({
-      entries: List(),
-      vote : Map({
-        pair : List.of('movie one', 'movie two'),
-        tally : Map({'movie one': 1}),
-      })
+    expect(nextState).to.equal(fromJS({
+      entries: [],
+      vote : {
+        pair : ['movie one', 'movie two'],
+        tally : {'movie one': 1},
+      }
     }))
   });
   it('handles TALLY to add to existing tally for the vote entry', () => {
@@ -40,12 +40,12 @@ describe('reducer', () => {
         })
     let action = {type: 'TALLY', tally : 'movie one'}
     let nextState = reducer(state, action)
-    expect(nextState).to.equal(Map({
-      entries: List(),
-      vote : Map({
-        pair : List.of('movie one', 'movie two'),
-        tally : Map({'movie one': 2, 'movie two': 2}),
-      })
+    expect(nextState).to.equal(fromJS({
+      entries: [],
+      vote : {
+        pair : ['movie one', 'movie two'],
+        tally : {'movie one': 2, 'movie two': 2},
+      }
     }))
   })
   it('handle NEXT to take the winner back to the entries and drop the loser', function(){
@@ -58,11 +58,11 @@ describe('reducer', () => {
     })
     let action = {type: 'NEXT'}
     let nextState = reducer(state, action)
-    expect(nextState).to.equal(Map({
-      vote : Map({
-        pair: List.of('movie three', 'movie four')
-      }),
-      entries : List.of('movie two')
+    expect(nextState).to.equal(fromJS({
+      vote : {
+        pair: ['movie three', 'movie four']
+      },
+      entries : ['movie two']
     }))
   });
   it('handle NEXT, tied vote puts both back to entries', function(){
@@ -75,11 +75,11 @@ describe('reducer', () => {
     })
     let action = {type: 'NEXT'}
     let nextState = reducer(state, action)
-    expect(nextState).to.equal(Map({
-      vote : Map({
-        pair: List.of('movie three', 'movie four')
-      }),
-      entries : List.of('movie one', 'movie two')
+    expect(nextState).to.equal(fromJS({
+      vote : {
+        pair: ['movie three', 'movie four']
+      },
+      entries : ['movie one', 'movie two']
     }))
   });
   it('the winner wins the vote', function(){
@@ -92,7 +92,7 @@ describe('reducer', () => {
     })
     let action = {type: 'NEXT'}
     let nextState = reducer(state, action)
-    expect(nextState).to.equal(Map({
+    expect(nextState).to.equal(fromJS({
       winner : 'movie one'
     }))
   });
