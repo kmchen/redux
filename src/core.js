@@ -12,11 +12,17 @@ export function next(state){
   let score2 = vote.getIn(['tally', b]);
   let entries = state.get('entries');
   let winner = (score1 == score2)? [a, b] : (score1 > score2)? a:b
+  let newEntries = entries.concat(winner)
+  if (newEntries.size == 1) { 
+    return state.remove('vote')
+                .remove('entries')
+                .set('winner', newEntries.get(0))
+  }
   return state.merge({
     vote : Map({
       pair : entries.take(2)
     }),
-      entries : entries.concat(winner).skip(2)
+      entries : newEntries.skip(2)
   })
 }
 

@@ -73,6 +73,19 @@ describe('application logic', () => {
       entries : List.of('movie one', 'movie two')
     }))
   });
+  it('the winner wins the vote', function(){
+    let state = Map({
+      vote : Map({
+        pair: List.of("movie one", "movie two"),
+        tally: Map({'movie one': 2, 'movie two': 1})
+      }),
+      entries: List.of()
+    })
+    let nextState = next(state)
+    expect(nextState).to.equal(Map({
+      winner : 'movie one'
+    }))
+  });
 });
 
 describe('Set entries ', function(){
