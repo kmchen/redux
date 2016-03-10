@@ -25,6 +25,7 @@
   "dependencies": {
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.3",
-    "immutable": "^3.7.6"
+    "immutable": "^3.7.6",
+    "redux": "^3.3.1"
   }
 }
