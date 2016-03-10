@@ -27,5 +27,7 @@ export function next(state){
 }
 
 export function tally(state, movie){
-  return state.updateIn(['vote', 'tally', movie], 0, tally => tally + 1)
+  return state.updateIn(['tally', movie], 0, tally => tally + 1)
 }
+
+export const INITIAL_STATE = Map();
