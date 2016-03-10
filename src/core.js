@@ -27,6 +27,7 @@ export function next(state){
 }
 
 export function tally(state, movie){
+  console.log('---------------', state)
   return state.updateIn(['tally', movie], 0, tally => tally + 1)
 }
 

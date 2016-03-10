@@ -5,7 +5,8 @@ export default function reducer(state = INITIAL_STATE, action) {
     case 'SET_ENTRIES' :
       return setEntries(state, action.entries)
     case 'TALLY' :
-      return tally(state, action.tally)
+      //return tally(state, action.tally)
+      return state.update('vote', vote => tally(vote, action.tally))
     case 'NEXT' :
       return next(state)
   }

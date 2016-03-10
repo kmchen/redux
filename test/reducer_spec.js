@@ -14,24 +14,38 @@ describe('reducer', () => {
     }));
   });
   it('handles TALLY to create a tally for the voted entry', () => {
-    let state = Map({ pair : List.of('movie one', 'movie two')})
+    let state = Map({
+          entries: List(),
+          vote : Map({
+            pair : List.of('movie one', 'movie two'),
+          })
+        })
     let action = {type: 'TALLY', tally : 'movie one'}
     let nextState = reducer(state, action)
     expect(nextState).to.equal(fromJS({
-      pair : ['movie one', 'movie two'],
-      tally : {'movie one': 1},
+      entries: [],
+      vote : {
+        pair : ['movie one', 'movie two'],
+        tally : {'movie one': 1},
+      }
     }))
   });
   it('handles TALLY to add to existing tally for the vote entry', () => {
-    let state = Map({ 
-      pair : List.of('movie one', 'movie two'),
-      tally : Map({'movie one': 1, 'movie two': 2})
-    })
+    let state = Map({
+          entries: List(),
+          vote : Map({
+            pair : List.of('movie one', 'movie two'),
+            tally : Map({'movie one': 1, 'movie two': 2}),
+          })
+        })
     let action = {type: 'TALLY', tally : 'movie one'}
     let nextState = reducer(state, action)
     expect(nextState).to.equal(fromJS({
+      entries: [],
+      vote : {
         pair : ['movie one', 'movie two'],
-        tally : {'movie one': 2, 'movie two': 2}
+        tally : {'movie one': 2, 'movie two': 2},
+      }
     }))
   })
   it('handle NEXT to take the winner back to the entries and drop the loser', function(){

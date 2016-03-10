@@ -5,11 +5,13 @@ import {setEntries, next, tally} from '../src/core';
 
 describe('vote', () => {
   it('creates a tally for the voted entry', () => {
-    let state = Map({ pair : List.of('movie one', 'movie two')})
+    let state = Map({
+          pair : List.of('movie one', 'movie two'),
+        })
     let vote = tally(state, 'movie one')
     expect(vote).to.equal(Map({
-      pair : List.of('movie one', 'movie two'),
-      tally : Map({'movie one': 1}),
+        pair : List.of('movie one', 'movie two'),
+        tally : Map({'movie one': 1}),
     }))
   })
 
@@ -17,7 +19,7 @@ describe('vote', () => {
     let state = Map({
           pair : List.of('movie one', 'movie two'),
           tally : Map({'movie one': 1, 'movie two': 2}),
-    })
+        })
     let vote = tally(state, 'movie one')
     expect(vote).to.equal(Map({
         pair : List.of('movie one', 'movie two'),
