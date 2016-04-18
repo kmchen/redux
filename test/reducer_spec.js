@@ -20,7 +20,7 @@ describe('reducer', () => {
             pair : List.of('movie one', 'movie two'),
           })
         })
-    let action = {type: 'TALLY', tally : 'movie one'}
+    let action = {type: 'VOTE', tally : 'movie one'}
     let nextState = reducer(state, action)
     expect(nextState).to.equal(fromJS({
       entries: [],
@@ -38,7 +38,7 @@ describe('reducer', () => {
             tally : Map({'movie one': 1, 'movie two': 2}),
           })
         })
-    let action = {type: 'TALLY', tally : 'movie one'}
+    let action = {type: 'VOTE', tally : 'movie one'}
     let nextState = reducer(state, action)
     expect(nextState).to.equal(fromJS({
       entries: [],

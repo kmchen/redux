@@ -4,8 +4,9 @@ export default function reducer(state = INITIAL_STATE, action) {
   switch(action.type) {
     case 'SET_ENTRIES' :
       return setEntries(state, action.entries)
-    case 'TALLY' :
-      return state.update('vote', vote => tally(vote, action.tally))
+    case 'VOTE' :
+      let s = state.update('vote', vote => tally(vote, action.tally))
+      return s
     case 'NEXT' :
       return next(state)
   }
