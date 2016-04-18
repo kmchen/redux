@@ -5,3 +5,7 @@ http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html#ending-the-vot
 RUINNING TEST
 -------------
 ./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive
+
+Run SERVER
+-------------
+npm run start
